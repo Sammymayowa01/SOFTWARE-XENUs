@@ -3,13 +3,18 @@ import GradientParticles from '@/components/animations/GradientParticles';
 import dynamic from 'next/dynamic';
 import type { Metadata } from 'next';
 
-// Dynamic imports to prevent hydration mismatch and manifest errors in RSC
-const WhatsAppButton = dynamic(() => import('@/components/common/WhatsAppButton'), { ssr: false });
+// Dynamic import to avoid SSR issues
+const WhatsAppButton = dynamic(
+  () => import('@/components/common/WhatsAppButton'),
+  { ssr: false }
+);
 
 export const metadata: Metadata = {
   title: 'Software Xenus | Custom Software & Cloud Solutions',
-  description: 'Software Xenus delivers bespoke software solutions, mobile apps, cloud infrastructure, and digital transformation services for enterprises worldwide.',
-  keywords: 'software development, cloud solutions, mobile apps, digital transformation, custom software, DevOps',
+  description:
+    'Software Xenus delivers bespoke software solutions, mobile apps, cloud infrastructure, and digital transformation services for enterprises worldwide.',
+  keywords:
+    'software development, cloud solutions, mobile apps, digital transformation, custom software, DevOps',
   authors: [{ name: 'Software Xenus' }],
   openGraph: {
     title: 'Software Xenus | Custom Software & Cloud Solutions',
@@ -32,14 +37,18 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body className="relative bg-[#0A1A2F] min-h-screen text-white antialiased">
-        {/* Animation 3: Background/Loop Animation */}
-        {/* <GradientParticles /> */}
 
+        {/* 🌌 Background animation */}
+        <div className="fixed inset-0 -z-10">
+          <GradientParticles />
+        </div>
+
+        {/* Main content */}
         <main className="relative z-10">
           {children}
         </main>
 
-        {/* WhatsApp Floating Button */}
+        {/* Floating WhatsApp button */}
         <WhatsAppButton />
       </body>
     </html>

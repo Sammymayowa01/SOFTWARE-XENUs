@@ -1,8 +1,13 @@
 {
   "scripts": {
     "dev": "concurrently \"npm run dev --prefix backend\" \"npm run dev --prefix \\\"web practices/innovative-software-and-technology\\\"\"",
+
     "dev:backend": "npm run dev --prefix backend",
-    "dev:frontend": "npm run dev --prefix \\\"web practices/innovative-software-and-technology\\\""
+    "dev:frontend": "npm run dev --prefix \"web practices/innovative-software-and-technology\"",
+
+    "build": "npm run build --prefix \"web practices/innovative-software-and-technology\"",
+    "start": "npm run start --prefix \"web practices/innovative-software-and-technology\"",
+    "lint": "npm run lint --prefix \"web practices/innovative-software-and-technology\""
   },
   "dependencies": {
     "concurrently": "^9.2.1",
