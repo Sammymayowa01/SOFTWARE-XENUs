@@ -149,13 +149,13 @@ import { pricing as fallbackPricing } from "@/constants";
 import { ShieldCheck, Loader2 } from "lucide-react";
 import { initiatePayment, fetchPlans } from "@/services/api";
 
-const PricingCard = ({
-  plan,
-  index,
-}: {
-  plan: { title: string; price: string; features: string[] };
-  index: number;
-}) => {
+type Plan = {
+  title: string;
+  price: string;
+  features: string[];
+};
+
+const PricingCard = ({ plan }: { plan: Plan }) => {
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -205,12 +205,8 @@ const PricingCard = ({
           {plan.title}
         </h3>
         <div className="flex items-baseline gap-1">
-          <span className="text-4xl font-bold text-white">
-            {plan.price}
-          </span>
-          {!isEnterprise && (
-            <span className="text-slate-500">/mo</span>
-          )}
+          <span className="text-4xl font-bold text-white">{plan.price}</span>
+          {!isEnterprise && <span className="text-slate-500">/mo</span>}
         </div>
       </div>
 
@@ -221,10 +217,7 @@ const PricingCard = ({
               key={idx}
               className="flex items-start gap-3 text-sm text-slate-300"
             >
-              <ShieldCheck
-                size={16}
-                className="text-blue-500 mt-0.5"
-              />
+              <ShieldCheck size={16} className="text-blue-500 mt-0.5" />
               {feature}
             </li>
           ))}
@@ -241,9 +234,7 @@ const PricingCard = ({
           />
         )}
 
-        {error && (
-          <p className="text-red-400 text-xs mb-3">{error}</p>
-        )}
+        {error && <p className="text-red-400 text-xs mb-3">{error}</p>}
 
         <button
           onClick={
@@ -270,7 +261,7 @@ const PricingCard = ({
 };
 
 const Pricing = () => {
-  const [plans, setPlans] = useState<any[]>([]);
+  const [plans, setPlans] = useState<Plan[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -281,7 +272,6 @@ const Pricing = () => {
         const response = await fetchPlans();
 
         if (isMounted) {
-          // ✅ Always safe (array only)
           if (Array.isArray(response) && response.length > 0) {
             setPlans(response);
           } else {
@@ -318,18 +308,11 @@ const Pricing = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
           {loading ? (
             <div className="col-span-full flex justify-center py-20">
-              <Loader2
-                className="animate-spin text-blue-500"
-                size={48}
-              />
+              <Loader2 className="animate-spin text-blue-500" size={48} />
             </div>
           ) : Array.isArray(plans) && plans.length > 0 ? (
             plans.map((plan, index) => (
-              <PricingCard
-                key={plan.title || index}
-                plan={plan}
-                index={index}
-              />
+              <PricingCard key={plan.title || index} plan={plan} />
             ))
           ) : (
             <div className="col-span-full text-center text-slate-500">
