@@ -1,0 +1,11 @@
+{
+  "scripts": {
+    "dev": "concurrently \"npm run dev --prefix backend\" \"npm run dev --prefix \\\"web practices/innovative-software-and-technology\\\"\"",
+    "dev:backend": "npm run dev --prefix backend",
+    "dev:frontend": "npm run dev --prefix \\\"web practices/innovative-software-and-technology\\\""
+  },
+  "dependencies": {
+    "concurrently": "^9.2.1",
+    "framer-motion": "^12.38.0"
+  }
+}

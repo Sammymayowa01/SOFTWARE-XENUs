@@ -1,0 +1,42 @@
+import React from 'react';
+
+const Logo: React.FC<{ className?: string }> = ({ className }) => {
+  return (
+    <svg
+      width="40"
+      height="40"
+      viewBox="0 0 100 100"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={className}
+    >
+      {/* Background/Base Shape */}
+      <rect width="100" height="100" rx="20" fill="#0A1A2F" />
+      
+      {/* Geometric "X" with circuit feel */}
+      <path
+        d="M30 30L70 70M70 30L30 70"
+        stroke="#3B82F6"
+        strokeWidth="8"
+        strokeLinecap="round"
+      />
+      
+      {/* Digital Nodes */}
+      <circle cx="30" cy="30" r="4" fill="#FFFFFF" />
+      <circle cx="70" cy="70" r="4" fill="#FFFFFF" />
+      <circle cx="70" cy="30" r="4" fill="#FFFFFF" />
+      <circle cx="30" cy="70" r="4" fill="#FFFFFF" />
+      <circle cx="50" cy="50" r="3" fill="#1D4ED8" />
+
+      {/* Subtle Neon Accents (Glow lines) */}
+      <path
+        d="M20 50H40M60 50H80M50 20V40M50 60V80"
+        stroke="#3B82F6"
+        strokeWidth="2"
+        strokeOpacity="0.5"
+      />
+    </svg>
+  );
+};
+
+export default Logo;
